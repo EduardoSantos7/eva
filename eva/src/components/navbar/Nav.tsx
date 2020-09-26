@@ -1,31 +1,28 @@
-import { NavItem, Navbar, Icon } from 'react-materialize';
 import React from 'react'
 import 'materialize-css';
 
+import {Search, ExpandMore, Language} from "@material-ui/icons"
+
+import "components/navbar/nav.css"
+import { Avatar } from '@material-ui/core';
+
 export default function Nav() {
     return (
-        <div>
-            <Navbar
-                alignLinks="right"
-                brand={<a className="brand-logo" href="/">EVA</a>}
-                id="mobile-nav"
-                menuIcon={<Icon>menu</Icon>}
-                options={{
-                    draggable: true,
-                    edge: 'left',
-                    inDuration: 250,
-                    outDuration: 200,
-                    preventScrolling: true
-                }}
-                search
-                >
-                <NavItem href="/">
-                    Getting started
-                </NavItem>
-                <NavItem href="components.html">
-                    Components
-                </NavItem>
-                </Navbar>
+        <div className="header">
+            <img className="header_icon" src="https://www.pngitem.com/pimgs/m/167-1676821_wall-e-and-eva-quotes-png-download-robot.png" alt=""/>
+        
+            <div className="header_center">
+                <input type="text"/>
+                <Search />
+            </div>
+
+            <div className="header_right">
+                <p>Become a Doctor</p>
+                <Language />
+                <ExpandMore />
+                <Avatar />
+            </div>
         </div>
+
     )
 }
