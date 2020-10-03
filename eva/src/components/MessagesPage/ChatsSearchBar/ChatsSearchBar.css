@@ -1,0 +1,56 @@
+.chats__search__bar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    padding-top: 10px;
+    z-index: 1;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 999px;
+    max-width: 365px;
+    max-height: 45px;
+    margin-left: 20px;
+}
+
+.search__bar {
+    border-radius: 999px;
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+}
+
+.search__bar>input {
+    margin-left: 58px;
+    min-height: 30px;
+    min-width: 320px;
+    border-bottom: none!important;
+    box-shadow: none!important;
+    text-align: start;
+    padding-right: 10px;
+}
+
+.search__bar>input::placeholder {
+    padding-top: 1px;
+    padding-left: 1px;
+}
+
+#search_button,
+#clear__button {
+    padding: 5px;
+    color: rgba(0, 0, 0, .25);
+    transform: scale(2);
+}
+
+#clear__button:hover {
+    color: black;
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 999px;
+    transition: transform 0.6s;
+    background-color: lightpink;
+    color: white;
+}

@@ -2,7 +2,7 @@
     color: white;
     background-color: white;
     border-right: 1px solid lightgray;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 .sidebar__header {
@@ -11,7 +11,7 @@
     display: flex;
     height: 60px;
     overflow: hidden;
-    padding: 10px 10px 10px 16px;
+    padding: 10px 6px 10px 16px;
 }
 
 .sidebar__header__title {
@@ -25,13 +25,14 @@
 
 .sidebar__header__icons__container {
     padding-top: 20px;
+    padding-left: 20px;
 }
 
-.MuiSvgIcon-root {
+.sidebar__header__icons__container>.MuiSvgIcon-root {
     padding: 4px;
-    margin: 15px;
+    margin-left: 35px;
     color: black;
-    transform: scale(2);
+    transform: scale(1.9);
     background-color: rgba(0, 0, 0, .04);
     border-radius: 999px;
 }

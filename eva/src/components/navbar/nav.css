@@ -8,6 +8,7 @@
     z-index: 100;
     width: 100%;
     box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.15);
+    max-height: 65px;
 }
 
 .header_icon {

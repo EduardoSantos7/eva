@@ -2,12 +2,15 @@ import React from 'react'
 
 import SettingsIcon from '@material-ui/icons/Settings';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
-import MessageIcon from '@material-ui/icons/Message';
+import CreateIcon from '@material-ui/icons/Create';
 
 import "components/MessagesPage/SideChats/SideChats.css"
-import { Grid } from '@material-ui/core';
+import { Grid} from '@material-ui/core';
+import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
+
 
 export default function SideChats() {
+
     return (
         <div className="sidebar">
             <div className="sidebar__header">
@@ -23,13 +26,13 @@ export default function SideChats() {
                         <div className="sidebar__header__icons__container">
                             <SettingsIcon className="sidebar__header__icon"/>
                             <VideoCallIcon className="sidebar__header__icon"/>
-                            <MessageIcon className="sidebar__header__icon"/>
+                            <CreateIcon className="sidebar__header__icon"/>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-            <div id="search-continaer">
-                search
+            <div className="search__continaer">
+                <ChatsSearchBar />
             </div>
             <div id="chats-container">
                 chats...
