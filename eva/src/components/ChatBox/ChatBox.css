@@ -1,0 +1,59 @@
+.chat__box {
+    display: flex;
+    flex-direction: row;
+    color: gray;
+    cursor: pointer;
+}
+
+.chat__box__profile_picture__img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.chat__box__main__info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    min-width: 230px;
+}
+
+.chat__box__profile__name {
+    color: black;
+    font-weight: 400;
+    font-size: 17px;
+    margin-top: 5px;
+}
+
+.chat__box__message__info {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat__box__message__info__time {
+    width: 40px;
+    margin-left: 10px;
+}
+
+.chat__box__message__info__status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 22px;
+}
+
+.chat__box__message__info__status__img {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+}
+
+.chat__box__message__info__status__button {
+    color: #0cc0ed;
+}
+
+.chat__box__last__message__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

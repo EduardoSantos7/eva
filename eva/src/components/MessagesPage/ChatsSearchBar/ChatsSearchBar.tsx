@@ -5,7 +5,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 import "components/MessagesPage/ChatsSearchBar/ChatsSearchBar.css"
 import { Grid } from "@material-ui/core";
-import { CardPanel } from "react-materialize";
 
 
 export default function ChatsSearchBar() {
@@ -20,7 +19,7 @@ export default function ChatsSearchBar() {
         console.log(value)
     }
     
-    const handleClearClick = (e: any) => {
+    const handleClearClick = () => {
         if (input.current?.value) {
             input.current.value = ""
             setValue("")
@@ -30,11 +29,6 @@ export default function ChatsSearchBar() {
 
     return (
         <div className="chats__search__bar">
-            {/* <InputBase         
-                placeholder="Search in messages"
-                inputProps={{ disableUnderline: true }}
-                multiline
-            /> */}
 
             <Grid container direction="row" justify="space-between" alignItems="center">
                 <Grid item xs={1}>
@@ -51,7 +45,7 @@ export default function ChatsSearchBar() {
                 <Grid item xs={1}>
                     <div className="clear__icon">
                         {
-                            showClear && <ClearIcon id="clear__button" onClick={(e) => handleClearClick(e)}/>
+                            showClear && <ClearIcon id="clear__button" onClick={() => handleClearClick()}/>
                         }
                     </div>
                 </Grid>
