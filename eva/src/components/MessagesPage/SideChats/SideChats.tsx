@@ -6,7 +6,7 @@ import CreateIcon from '@material-ui/icons/Create';
 
 import "components/MessagesPage/SideChats/SideChats.css"
 import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
-import ChatsList from "components/ChatsList/ChatsList";
+import ChatsList from "components/MessagesPage/ChatsList/ChatsList";
 
 
 export default function SideChats() {

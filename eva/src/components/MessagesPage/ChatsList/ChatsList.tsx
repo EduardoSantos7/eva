@@ -1,7 +1,7 @@
 import React from 'react'
 
-import "components/ChatsList/ChatsList.css";
-import ChatBox from "components/ChatBox/ChatBox";
+import "components/MessagesPage/ChatsList/ChatsList.css";
+import ChatBox from "components/MessagesPage/ChatBox/ChatBox";
 
 export default function ChatsList() {
     return (

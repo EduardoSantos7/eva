@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import "components/ChatBox/ChatBox.css";
+import "components/MessagesPage/ChatBox/ChatBox.css";
 import { ChatBoxProps } from "interfaces/ChatBoxProps";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
