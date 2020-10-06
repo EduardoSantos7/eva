@@ -1,0 +1,8 @@
+#MessagesPage {
+    display: flex;
+    color: black;
+}
+
+#chat__container {
+    flex: .7;
+}

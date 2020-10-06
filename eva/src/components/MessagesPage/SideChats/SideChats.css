@@ -1,0 +1,47 @@
+.sidebar {
+    color: white;
+    background-color: white;
+    border-right: 1px solid lightgray;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    flex: .3;
+}
+
+.sidebar__header {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    display: flex;
+    height: 65px;
+    overflow: hidden;
+    padding: 10px 6px 10px 16px;
+}
+
+.sidebar__header__title {
+    color: rgba(0, 0, 0, 1);
+    font-size: 24px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all .25s;
+}
+
+.sidebar__header__icons__container {
+    padding-top: 20px;
+    margin-right: 25px;
+}
+
+.sidebar__header__icons__container>.MuiSvgIcon-root {
+    padding: 4px;
+    margin-left: 30px;
+    color: black;
+    transform: scale(1.7);
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 999px;
+}
+
+h3 {
+    color: blue;
+}
