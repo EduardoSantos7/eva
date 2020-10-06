@@ -4,7 +4,7 @@ import 'materialize-css';
 import {Search, ExpandMore, Language} from "@material-ui/icons"
 
 import "components/navbar/nav.css"
-import { Avatar } from '@material-ui/core';
+import { Avatar, InputBase } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 export default function Nav() {
@@ -19,7 +19,11 @@ export default function Nav() {
             </Link>
            
             <div className='header_center'>
-                <input type="text" />
+                <InputBase
+                    placeholder="Search in Eva"
+                    inputProps={{ disableUnderline: true }}
+                    multiline
+                />
                 <Search />
             </div>
 
