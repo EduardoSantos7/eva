@@ -7,9 +7,10 @@ import CreateIcon from '@material-ui/icons/Create';
 import "components/MessagesPage/SideChats/SideChats.css"
 import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
 import ChatsList from "components/MessagesPage/ChatsList/ChatsList";
+import { SideChatsProps } from "interfaces/SideChatsProps";
 
 
-export default function SideChats() {
+export default function SideChats(props:SideChatsProps) {
     let searched_value = false;
     return (
         <div className="sidebar">
@@ -30,7 +31,7 @@ export default function SideChats() {
                 {
                     !searched_value  && ( 
                         <div id="chats__list">
-                            <ChatsList />
+                            <ChatsList chats={ props.chats }/>
                         </div>)
                 }
                 {

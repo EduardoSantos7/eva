@@ -13,7 +13,7 @@ export default function MessagesPage() {
     const { chatId } = useParams<MessagesParams>();
     const ENDPOINT = 'ws://localhost:9000/';
 
-    const [_chats, setchats] = useState<[any]>()
+    const [chats, setchats] = useState<any[]>()
 
     useEffect(() => {
 
@@ -21,14 +21,17 @@ export default function MessagesPage() {
 
         socket.emit('chats', '1')
         
-        socket.on('chats', (chats: [ChatOverview]) => {
-            setchats(chats)
+        socket.on('chats', (chats_list: string) => {
+            console.log(JSON.parse(chats_list))
+            let chats_parsed = JSON.parse(chats_list)
+            setchats(chats_parsed)
+            console.log(chats_parsed)
         })
     }, [ENDPOINT]);
 
     return (
         <div id="MessagesPage">
-            <SideChats />
+        <SideChats chats={ chats }/>
             <ChatContainer/>
         </div>
     )
