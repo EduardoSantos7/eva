@@ -6,14 +6,14 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useHistory } from "react-router";
 
-export default function ChatBox({ profile_image, profile_name, message_id }: ChatBoxProps) {
+export default function ChatBox({ profile_image, profile_name, id }: ChatBoxProps) {
     let seen = true;
     const [isOptionsShown, setIsOptionsShown] = useState(false);
     const history = useHistory();
 
     const goToChat = () => {
-        if (message_id) {
-            history.push(`${message_id}`)
+        if (id) {
+            history.push(`${id}`)
         }
     }
 
