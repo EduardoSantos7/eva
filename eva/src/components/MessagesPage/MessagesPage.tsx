@@ -6,19 +6,25 @@ import ChatContainer from "components/MessagesPage/ChatContainer/ChatContainer";
 import { useParams } from "react-router";
 import { MessagesParams } from "interfaces/MessagesParams";
 import { ChatOverview } from "interfaces/ChatOverview";
-import { ChatsProvider, useChats } from "contexts/Chats";
 
 let socket;
 
-function MessagesPage() {
+export default function MessagesPage() {
     const { chatId } = useParams<MessagesParams>();
     const ENDPOINT = 'ws://localhost:9000/';
 
-    const { chats } = useChats();
-    
+    const [_chats, setchats] = useState<[any]>()
+
     useEffect(() => {
-        console.log(chats)
-    }, )
+
+        socket = io(ENDPOINT);
+
+        socket.emit('chats', '1')
+        
+        socket.on('chats', (chats: [ChatOverview]) => {
+            setchats(chats)
+        })
+    }, [ENDPOINT]);
 
     return (
         <div id="MessagesPage">
@@ -27,9 +33,3 @@ function MessagesPage() {
         </div>
     )
 }
-
-export default () => (
-      <ChatsProvider>
-        <MessagesPage/>
-      </ChatsProvider>
-);
