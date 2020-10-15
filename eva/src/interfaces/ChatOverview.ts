@@ -5,3 +5,11 @@ export interface ChatOverview {
     status?: string
     last_message?: string
 }
+
+export const defaultChatOverview = {
+    id: "",
+    profile_name: "",
+    profile_image: "",
+    status: "",
+    last_message: "",
+}

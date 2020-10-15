@@ -1,3 +1,3 @@
 export interface SideChatsProps {
-    chats: any[] | undefined
+    chats: any[] | undefined;
 }
