@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from 'react';
 import SearchPage from 'components/searchPage/SearchPage';
 import MessagesPage from 'components/MessagesPage/MessagesPage';
+import { WindowStateProviderProvider } from "providers/WindowStateProvider";
 
 import "App.css"
 
@@ -16,7 +17,9 @@ function App() {
           <Switch>
             <Route path="/search" component={SearchPage} />
             <Route path="/messages/:chatId">
-              <MessagesPage />
+              <WindowStateProviderProvider>
+                <MessagesPage />
+              </WindowStateProviderProvider>
             </Route>
             <Route path="/" component={LandingPage} />
           </Switch>

@@ -5,23 +5,15 @@ import SideBarHeader from "components/MessagesPage/SideBarHeader/SideBarHeader";
 import ChatsList from "components/MessagesPage/ChatsList/ChatsList";
 import { SideChatsProps } from "interfaces/SideChatsProps";
 import "components/MessagesPage/SideChats/SideChats.css"
+import { useWindowState } from "providers/WindowStateProvider";
+import CreateIcon from '@material-ui/icons/Create';
 
 
 export default function SideChats(props:SideChatsProps) {
     let searched_value = false;
 
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => {
-            const isSmallScreenAuxiliar = window.innerWidth < 650;
-            if (isSmallScreenAuxiliar !== isSmallScreen) setIsSmallScreen(isSmallScreenAuxiliar);
-            console.log(window.innerWidth,  isSmallScreen);
-            
-        }, false);
-        
-    }, [isSmallScreen]);
-
+    const {isSmallScreen} = useWindowState()
+    
     return (
         <div className="sidebar">
             {
@@ -30,6 +22,9 @@ export default function SideChats(props:SideChatsProps) {
             <div className="search__continaer">
                 {
                     !isSmallScreen && <ChatsSearchBar />
+                }
+                {
+                    isSmallScreen && <div className="search__continaer__icon"><CreateIcon/></div>
                 }
             </div>
             <div className="search__results">

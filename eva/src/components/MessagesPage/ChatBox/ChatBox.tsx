@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-import "components/MessagesPage/ChatBox/ChatBox.css";
-import { ChatBoxProps } from "interfaces/ChatBoxProps";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { useWindowState } from "providers/WindowStateProvider";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { ChatBoxProps } from "interfaces/ChatBoxProps";
 import { useHistory } from "react-router";
+import "components/MessagesPage/ChatBox/ChatBox.css";
 
 export default function ChatBox({ profile_image, profile_name, id, last_message, last_connection }: ChatBoxProps) {
+    const {isSmallScreen} = useWindowState()
     const [seen, setSeen] = useState(true)
     const [isOptionsShown, setIsOptionsShown] = useState(false);
     const history = useHistory();
@@ -50,40 +52,51 @@ export default function ChatBox({ profile_image, profile_name, id, last_message,
         }
     }
 
+    const getExtraClasses = (seen: boolean, isSmallScreen: boolean) => {
+        if(isSmallScreen && !seen) {
+            return 'sm_background'
+        }
+        else {
+            return ''
+        }
+    }
+
     useEffect(() => {
         isMessageSeen()
     }, [last_message]);
 
     return (
-        <div className="chat__box" onMouseEnter={() => setIsOptionsShown(true)} onMouseLeave={() => setIsOptionsShown(false)} onClick={() => goToChat()}>
-            <div className="chat__box__profile__picture">
+        <div className={"chat__box " + getExtraClasses(seen, isSmallScreen)} onMouseEnter={() => setIsOptionsShown(true)} onMouseLeave={() => setIsOptionsShown(false)} onClick={() => goToChat()}>
+            <div className={isSmallScreen ? "chat__box__profile__picture_sm" : "chat__box__profile__picture"} title={profile_name}>
                 <img className="chat__box__profile_picture__img" src={profile_image} alt=""/>
             </div>
-            <div className="chat__box__main__info">
-                <div className={!seen ? "chat__box__profile__name bold_text" : "chat__box__profile__name"}>
-                    {profile_name}
-                </div>
-                <div className="chat__box__last__message__info">
-                    <div className={!seen ? "chat__box__last__message bold_text" : 'chat__box__last__message'}>
-                        {last_message.content.length > 26 ? `${last_message.content.substring(0, 26)}...`: last_message.content}
+            <div className={isSmallScreen ? 'hidden': 'not_hidden'}>
+                <div className="chat__box__main__info">
+                    <div className={!seen ? "chat__box__profile__name bold_text" : "chat__box__profile__name"}>
+                        {profile_name}
                     </div>
-                    <div className="chat__box__message__info__time">
-                        {formatDateMessage(last_message.creation_date)}
+                    <div className="chat__box__last__message__info">
+                        <div className={!seen ? "chat__box__last__message bold_text" : 'chat__box__last__message'}>
+                            {(last_message.content.length > 26 ? `${last_message.content.substring(0, 26)}...`: last_message.content)}
+                        </div>
+                        <div className="chat__box__message__info__time">
+                            {formatDateMessage(last_message.creation_date)}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="chat__box__message__info">
-                <div className="chat__box__message__info__status">
-                    {
-                        !seen && !isOptionsShown && <FiberManualRecordIcon className="chat__box__message__info__status__button"/>
-                    }
-                    {
-                        seen && !isOptionsShown &&  <img className="chat__box__message__info__status__img" src={profile_image} alt=""/>
+                <div className="chat__box__message__info">
+                    <div className="chat__box__message__info__status">
+                        {
+                            !seen && !isOptionsShown && <FiberManualRecordIcon className="chat__box__message__info__status__button"/>
+                        }
+                        {
+                            seen && !isOptionsShown &&  <img className="chat__box__message__info__status__img" src={profile_image} alt=""/>
 
-                    }
-                    {
-                        isOptionsShown && <MoreHorizIcon className=""/>
-                    }
+                        }
+                        {
+                            isOptionsShown && <MoreHorizIcon className=""/>
+                        }
+                    </div>
                 </div>
             </div>
 
