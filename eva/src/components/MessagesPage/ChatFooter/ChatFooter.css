@@ -1,0 +1,54 @@
+.chat__footer,
+.chat__footer__send,
+.chat__footer__multimedia__icons,
+.chat__footer__textarea__container {
+    display: flex;
+    max-height: 45px;
+}
+
+.chat__footer {
+    bottom: 10px;
+    position: fixed;
+    background-color: white;
+    min-width: 100%;
+}
+
+.chat__footer__textarea {
+    text-align: start;
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.chat__footer__textarea__container {
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 999px;
+    margin-left: 0;
+    max-height: 45px;
+    margin-left: 10px;
+    flex: .65;
+}
+
+.chat__footer__multimedia__icons {
+    min-width: fit-content;
+}
+
+.chat__footer>*>.MuiSvgIcon-root {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 5px;
+    margin-bottom: 100px;
+    padding: 2px;
+    color: #0c88ed;
+    transform: scale(1.7);
+}
+
+.chat__footer__send {
+    min-width: fit-content;
+}

@@ -1,36 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import SettingsIcon from '@material-ui/icons/Settings';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
+import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
+import SideBarHeader from "components/MessagesPage/SideBarHeader/SideBarHeader";
+import ChatsList from "components/MessagesPage/ChatsList/ChatsList";
+import { SideChatsProps } from "interfaces/SideChatsProps";
+import "components/MessagesPage/SideChats/SideChats.css"
+import { useWindowState } from "providers/WindowStateProvider";
 import CreateIcon from '@material-ui/icons/Create';
 
-import "components/MessagesPage/SideChats/SideChats.css"
-import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
-import ChatsList from "components/MessagesPage/ChatsList/ChatsList";
 
-
-export default function SideChats() {
+export default function SideChats(props:SideChatsProps) {
     let searched_value = false;
+
+    const {isSmallScreen} = useWindowState()
+    
     return (
         <div className="sidebar">
-            <div className="sidebar__header">
-                <h1 className="sidebar__header__title">
-                    Chats
-                </h1>
-                <div className="sidebar__header__icons__container">
-                    <SettingsIcon className="sidebar__header__icon"/>
-                    <VideoCallIcon className="sidebar__header__icon"/>
-                    <CreateIcon className="sidebar__header__icon"/>
-                </div>
-            </div>
+            {
+                !isSmallScreen && <SideBarHeader /> 
+            }
             <div className="search__continaer">
-                <ChatsSearchBar />
+                {
+                    !isSmallScreen && <ChatsSearchBar />
+                }
+                {
+                    isSmallScreen && <div className="search__continaer__icon"><CreateIcon/></div>
+                }
             </div>
             <div className="search__results">
                 {
                     !searched_value  && ( 
                         <div id="chats__list">
-                            <ChatsList />
+                            <ChatsList chats={ props.chats }/>
                         </div>)
                 }
                 {

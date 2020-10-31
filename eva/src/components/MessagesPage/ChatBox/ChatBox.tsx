@@ -1,43 +1,102 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import "components/MessagesPage/ChatBox/ChatBox.css";
-import { ChatBoxProps } from "interfaces/ChatBoxProps";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { useWindowState } from "providers/WindowStateProvider";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { ChatBoxProps } from "interfaces/ChatBoxProps";
+import { useHistory } from "react-router";
+import "components/MessagesPage/ChatBox/ChatBox.css";
 
-export default function ChatBox({ profile_image, profile_name, messages }: ChatBoxProps) {
-    let seen = false;
+export default function ChatBox({ profile_image, profile_name, id, last_message, last_connection }: ChatBoxProps) {
+    const {isSmallScreen} = useWindowState()
+    const [seen, setSeen] = useState(true)
     const [isOptionsShown, setIsOptionsShown] = useState(false);
-    return (
-        <div className="chat__box" onMouseEnter={() => setIsOptionsShown(true)} onMouseLeave={() => setIsOptionsShown(false)}>
-            <div className="chat__box__profile__picture">
-                <img className="chat__box__profile_picture__img" src="https://scontent.fpbc1-1.fna.fbcdn.net/v/t1.0-9/120801781_10218339207017802_7936581300890444311_o.jpg?_nc_cat=105&_nc_sid=84a396&_nc_eui2=AeH9V4kGYLuU4F-xIeaJcMoxEEW2NfE_-zkQRbY18T_7OYcsyEUd06B5JepUQGjt55I&_nc_ohc=Zso_hCbj9NMAX_Hk9dy&_nc_oc=AQlAK6sUN_rJxWXRylRh9910UsNQ6n4pI2lCbcu2t7UrPheLNJEgiaXekX5ehrkMFADRG8GRuye_z1dGi6Zjf5Xf&_nc_ht=scontent.fpbc1-1.fna&oh=28a02f1ee928b45f3686c7e45a9bfa5f&oe=5FA0054D" alt=""/>
-            </div>
-            <div className="chat__box__main__info">
-                <div className="chat__box__profile__name">
-                    Eduardo Luis Santos
-                </div>
-                <div className="chat__box__last__message__info">
-                    <div className="chat__box__last__message">
-                        Eduardo: Hola  estas...
-                    </div>
-                    <div className="chat__box__message__info__time">
-                        1:35
-                    </div>
-                </div>
-            </div>
-            <div className="chat__box__message__info">
-                <div className="chat__box__message__info__status">
-                    {
-                        !seen && !isOptionsShown && <FiberManualRecordIcon className="chat__box__message__info__status__button"/>
-                    }
-                    {
-                        seen && !isOptionsShown &&  <img className="chat__box__message__info__status__img" src="https://scontent.fpbc1-1.fna.fbcdn.net/v/t1.0-9/120801781_10218339207017802_7936581300890444311_o.jpg?_nc_cat=105&_nc_sid=84a396&_nc_eui2=AeH9V4kGYLuU4F-xIeaJcMoxEEW2NfE_-zkQRbY18T_7OYcsyEUd06B5JepUQGjt55I&_nc_ohc=Zso_hCbj9NMAX_Hk9dy&_nc_oc=AQlAK6sUN_rJxWXRylRh9910UsNQ6n4pI2lCbcu2t7UrPheLNJEgiaXekX5ehrkMFADRG8GRuye_z1dGi6Zjf5Xf&_nc_ht=scontent.fpbc1-1.fna&oh=28a02f1ee928b45f3686c7e45a9bfa5f&oe=5FA0054D" alt=""/>
+    const history = useHistory();
+    const myId = "1"
 
-                    }
-                    {
-                        isOptionsShown && <MoreHorizIcon className=""/>
-                    }
+    const goToChat = () => {
+        if (id) {
+            history.push(`${id}`)
+        }
+    }
+
+    const isMessageSeen = () => {
+        if (!last_message) return;
+        // select the id of the receiver
+        let idToCheck = (last_message.author === id) ? myId : id
+        console.log("id->", idToCheck, last_connection[idToCheck], last_message.creation_date, last_connection[idToCheck] >= last_message.creation_date);
+        
+        let val = last_connection[idToCheck] >= last_message.creation_date ? true : false
+        setSeen(val)
+
+    }
+
+    const formatDateMessage = (raw_date: string) => {
+        let now = new Date()
+        let date = new Date(raw_date)
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        const utc2 = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+        let difference = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+
+
+        if (difference < 1) {
+            return `${date.getHours()}:${date.getMinutes() < 10 ? '0':''}${date.getMinutes()}`
+        }
+        else if (difference < 7) {
+            return `${date.getDay()}`
+        }
+        else {
+            return `${date.getDate()} - ${date.getMonth()}`
+        }
+    }
+
+    const getExtraClasses = (seen: boolean, isSmallScreen: boolean) => {
+        if(isSmallScreen && !seen) {
+            return 'sm_background'
+        }
+        else {
+            return ''
+        }
+    }
+
+    useEffect(() => {
+        isMessageSeen()
+    }, [last_message]);
+
+    return (
+        <div className={"chat__box " + getExtraClasses(seen, isSmallScreen)} onMouseEnter={() => setIsOptionsShown(true)} onMouseLeave={() => setIsOptionsShown(false)} onClick={() => goToChat()}>
+            <div className={isSmallScreen ? "chat__box__profile__picture_sm" : "chat__box__profile__picture"} title={profile_name}>
+                <img className="chat__box__profile_picture__img" src={profile_image} alt=""/>
+            </div>
+            <div className={isSmallScreen ? 'hidden': 'not_hidden'}>
+                <div className="chat__box__main__info">
+                    <div className={!seen ? "chat__box__profile__name bold_text" : "chat__box__profile__name"}>
+                        {profile_name}
+                    </div>
+                    <div className="chat__box__last__message__info">
+                        <div className={!seen ? "chat__box__last__message bold_text" : 'chat__box__last__message'}>
+                            {(last_message.content.length > 26 ? `${last_message.content.substring(0, 26)}...`: last_message.content)}
+                        </div>
+                        <div className="chat__box__message__info__time">
+                            {formatDateMessage(last_message.creation_date)}
+                        </div>
+                    </div>
+                </div>
+                <div className="chat__box__message__info">
+                    <div className="chat__box__message__info__status">
+                        {
+                            !seen && !isOptionsShown && <FiberManualRecordIcon className="chat__box__message__info__status__button"/>
+                        }
+                        {
+                            seen && !isOptionsShown &&  <img className="chat__box__message__info__status__img" src={profile_image} alt=""/>
+
+                        }
+                        {
+                            isOptionsShown && <MoreHorizIcon className=""/>
+                        }
+                    </div>
                 </div>
             </div>
 
