@@ -19,7 +19,6 @@ export default function MessagesPage() {
     const { chatId } = useParams<MessagesParams>();
 
     const updateCurrentChat = async() => {
-        console.log("entrreeeeeee", chatId)
         if (chats) {
             let chat: ChatOverview = chats.filter((elem: ChatOverview) => elem.id === chatId)[0]
             setCurrentChat(chat)
@@ -34,9 +33,9 @@ export default function MessagesPage() {
 
         socket = io(ENDPOINT);
 
-        socket.emit('chats', '1')
+        socket.emit('getChats', '1')
         
-        socket.on('chats', (chats_list: string) => {
+        socket.on('chatsResponse', (chats_list: string) => {
             console.log(JSON.parse(chats_list));
             let chats_parsed = JSON.parse(chats_list);
             setchats(chats_parsed);

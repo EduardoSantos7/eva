@@ -1,4 +1,4 @@
-import Nav from 'components/navbar/Nav';
+import Nav from 'components/common/navbar/Nav';
 import LandingPage from 'components/landingPage/LandingPage';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from 'react';
