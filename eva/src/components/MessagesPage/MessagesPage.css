@@ -1,6 +1,7 @@
 #MessagesPage {
     display: flex;
     color: black;
+    height: 100vh;
 }
 
 #chat__container {

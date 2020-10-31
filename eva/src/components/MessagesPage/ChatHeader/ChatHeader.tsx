@@ -5,21 +5,23 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import InfoIcon from '@material-ui/icons/Info';
 
 import "components/MessagesPage/ChatHeader/ChatHeader.css"
+import { ChatOverview } from "interfaces/ChatOverview";
 
-export default function ChatHeader() {
+export default function ChatHeader({ profile_image, profile_name, status }: ChatOverview) {
+
     return (
         <div className="chat__header">
             <div className="chat__header__right">
                 <div className="chat__header__right__picture">
-                    <img className="chat__header__right__picture__img" src="https://scontent.fpbc1-1.fna.fbcdn.net/v/t1.0-9/120801781_10218339207017802_7936581300890444311_o.jpg?_nc_cat=105&_nc_sid=84a396&_nc_eui2=AeH9V4kGYLuU4F-xIeaJcMoxEEW2NfE_-zkQRbY18T_7OYcsyEUd06B5JepUQGjt55I&_nc_ohc=Zso_hCbj9NMAX_Hk9dy&_nc_oc=AQlAK6sUN_rJxWXRylRh9910UsNQ6n4pI2lCbcu2t7UrPheLNJEgiaXekX5ehrkMFADRG8GRuye_z1dGi6Zjf5Xf&_nc_ht=scontent.fpbc1-1.fna&oh=28a02f1ee928b45f3686c7e45a9bfa5f&oe=5FA0054D" alt=""/>
+                    {profile_image && <img className="chat__header__right__picture__img" src = {profile_image} alt=""/>}
                 </div>
                 <div className="chat__header__main__info">
                     <div className="chat__header__profile__name">
-                        Eduardo Luis Santos
+                        { profile_name }
                     </div>
                     <div className="chat__header__last__message__info">
                         <div className="chat__header__last__message">
-                            Activo(a) hace 14 min.
+                            {status}
                         </div>
                     </div>
                 </div>

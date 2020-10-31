@@ -1,0 +1,27 @@
+.main__search__bar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0 20px;
+    padding-top: 10px;
+    z-index: 1;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, .04);
+    border-radius: 999px;
+    max-height: 45px;
+    max-width: 270px;
+}
+
+.main__search__bar>.search__bar>input {
+    min-height: 30px;
+    max-width: 120px;
+    border-bottom: none!important;
+    box-shadow: none!important;
+    text-align: start;
+    padding-right: 10px;
+}
+
+.main__search__bar>.search__bar>input::placeholder {
+    padding-top: 1px;
+    padding-left: 1px;
+}
