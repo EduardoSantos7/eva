@@ -6,7 +6,7 @@ const defaultWindowState = {
 
 export const WindowStateProviderContext = React.createContext(defaultWindowState);
 
-export function WindowStateProviderProvider(props: any) {
+export function WindowStateProvider(props: any) {
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 900);
     
     let WindowStateContext = {

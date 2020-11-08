@@ -7,8 +7,13 @@ import "components/common/navbar/nav.css"
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MainSearchBar from "components/common/MainSearchBar/MainSearchBar";
+import { useUser } from "providers/UserProvider";
 
 export default function Nav() {
+    const user = useUser()
+
+    console.log(user)
+
     return (
         <div className='header'>
             <div className="header__left">

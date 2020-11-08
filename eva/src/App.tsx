@@ -4,28 +4,31 @@ import React from 'react';
 import SearchPage from 'components/searchPage/SearchPage';
 import MessagesPage from 'components/MessagesPage/MessagesPage';
 import LandingPage from "components/LandingPage/LandingPage/LandingPage";
-import { WindowStateProviderProvider } from "providers/WindowStateProvider";
+import { UserProvider } from "providers/UserProvider";
+import { WindowStateProvider } from "providers/WindowStateProvider";
 
 import "App.css"
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Nav />
-        <div className="app__body">
-          <Switch>
-            <Route path="/search" component={SearchPage} />
-            <Route path="/messages/:chatId">
-              <WindowStateProviderProvider>
-                <MessagesPage />
-              </WindowStateProviderProvider>
-            </Route>
-            <Route path="/" component={LandingPage} />
-          </Switch>
+      <UserProvider>
+        <Router>
+          <Nav />
+          <div className="app__body">
+            <Switch>
+              <Route path="/search" component={SearchPage} />
+              <Route path="/messages/:chatId">
+                <WindowStateProvider>
+                  <MessagesPage />
+                </WindowStateProvider>
+              </Route>
+              <Route path="/" component={LandingPage} />
+            </Switch>
 
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </UserProvider>
     </div>
   );
 }
