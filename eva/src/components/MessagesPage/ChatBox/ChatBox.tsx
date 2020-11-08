@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { useWindowState } from "providers/WindowStateProvider";
@@ -20,7 +20,7 @@ export default function ChatBox({ profile_image, profile_name, id, last_message,
         }
     }
 
-    const isMessageSeen = () => {
+    const isMessageSeen =  useCallback(() => {
         if (!last_message) return;
         // select the id of the receiver
         let idToCheck = (last_message.author === id) ? myId : id
@@ -29,7 +29,7 @@ export default function ChatBox({ profile_image, profile_name, id, last_message,
         let val = last_connection[idToCheck] >= last_message.creation_date ? true : false
         setSeen(val)
 
-    }
+    }, [id, last_connection, last_message])
 
     const formatDateMessage = (raw_date: string) => {
         let now = new Date()
@@ -63,7 +63,7 @@ export default function ChatBox({ profile_image, profile_name, id, last_message,
 
     useEffect(() => {
         isMessageSeen()
-    }, [last_message]);
+    }, [last_message, isMessageSeen]);
 
     return (
         <div className={"chat__box " + getExtraClasses(seen, isSmallScreen)} onMouseEnter={() => setIsOptionsShown(true)} onMouseLeave={() => setIsOptionsShown(false)} onClick={() => goToChat()}>

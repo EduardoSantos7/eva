@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const defaultWindowState = {
     isSmallScreen: window.innerWidth < 900
@@ -13,19 +13,16 @@ export function WindowStateProviderProvider(props: any) {
         isSmallScreen: isSmallScreen
     }
 
-	useEffect(() => {
-        window.addEventListener("resize", () => {
-            const isSmallScreenAuxiliar = window.innerWidth < 900;
-            if (isSmallScreenAuxiliar !== isSmallScreen) setIsSmallScreen(isSmallScreenAuxiliar);
-            console.log(window.innerWidth,  isSmallScreen);
+    window.addEventListener("resize", () => {
+        const isSmallScreenAuxiliar = window.innerWidth < 900;
+        if (isSmallScreenAuxiliar !== isSmallScreen) setIsSmallScreen(isSmallScreenAuxiliar);
+        console.log(window.innerWidth,  isSmallScreen);
 
-            WindowStateContext = {
-                isSmallScreen: isSmallScreen
-            }
-            
-        }, false);
+        WindowStateContext = {
+            isSmallScreen: isSmallScreen
+        }
         
-    }, [isSmallScreen]);
+    }, false);
 
 	return <WindowStateProviderContext.Provider value={WindowStateContext} {...props} />
 }

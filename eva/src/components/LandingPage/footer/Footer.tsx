@@ -1,5 +1,5 @@
 import React from 'react'
-import "components/footer/footer.css"
+import "components/LandingPage/footer/footer.css"
 
 export default function Footer() {
     return (

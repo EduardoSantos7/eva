@@ -1,10 +1,10 @@
 import React from 'react'
 import 'materialize-css';
 
-import {Search, ExpandMore, Language} from "@material-ui/icons"
+import {ExpandMore, Language} from "@material-ui/icons"
 
 import "components/common/navbar/nav.css"
-import { Avatar, InputBase } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MainSearchBar from "components/common/MainSearchBar/MainSearchBar";
 

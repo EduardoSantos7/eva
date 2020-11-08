@@ -1,9 +1,9 @@
 import Nav from 'components/common/navbar/Nav';
-import LandingPage from 'components/landingPage/LandingPage';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from 'react';
 import SearchPage from 'components/searchPage/SearchPage';
 import MessagesPage from 'components/MessagesPage/MessagesPage';
+import LandingPage from "components/LandingPage/LandingPage/LandingPage";
 import { WindowStateProviderProvider } from "providers/WindowStateProvider";
 
 import "App.css"

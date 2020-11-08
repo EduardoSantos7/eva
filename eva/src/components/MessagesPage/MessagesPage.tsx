@@ -18,18 +18,14 @@ export default function MessagesPage() {
     const [currentChat, setCurrentChat] = useState<ChatOverview>(defaultChatOverview)
     const { chatId } = useParams<MessagesParams>();
 
-    const updateCurrentChat = async() => {
-        if (chats) {
-            let chat: ChatOverview = chats.filter((elem: ChatOverview) => elem.id === chatId)[0]
-            setCurrentChat(chat)
+    
+    useEffect(() => {
+        const updateCurrentChat = async() => {
+            if (chats) {
+                let chat: ChatOverview = chats.filter((elem: ChatOverview) => elem.id === chatId)[0]
+                setCurrentChat(chat)
+            }
         }
-    }
-
-    useEffect(() => {
-        updateCurrentChat()
-    }, [chats])
-
-    useEffect(() => {
 
         socket = io(ENDPOINT);
 
@@ -39,18 +35,12 @@ export default function MessagesPage() {
             console.log(JSON.parse(chats_list));
             let chats_parsed = JSON.parse(chats_list);
             setchats(chats_parsed);
-            updateCurrentChat()
             console.log(chats_parsed);
         });
 
-    }, [ENDPOINT]);
-
-
-    // If the chat change then ask for the info of tthe new chat
-    useEffect(() => {
-        console.log(chatId)
         updateCurrentChat()
-    }, [chatId])
+        
+    }, [ENDPOINT, chatId, chats]);
 
     return (
         <div id="MessagesPage">
