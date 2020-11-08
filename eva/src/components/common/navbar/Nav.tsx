@@ -3,28 +3,26 @@ import 'materialize-css';
 
 import {Search, ExpandMore, Language} from "@material-ui/icons"
 
-import "components/navbar/nav.css"
+import "components/common/navbar/nav.css"
 import { Avatar, InputBase } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import MainSearchBar from "components/common/MainSearchBar/MainSearchBar";
 
 export default function Nav() {
     return (
         <div className='header'>
-            <Link to='/'>
-                <img
-                    className="header_icon"
-                    src="https://i.pinimg.com/originals/3c/bf/be/3cbfbe148597341fa56f2f87ade90956.png"
-                    alt=""
-                />
-            </Link>
+            <div className="header__left">
+                <Link to='/'>
+                    <img
+                        className="header_icon"
+                        src="https://cdn.pixabay.com/photo/2018/05/08/21/28/airbnb-3384008_640.png"
+                        alt=""
+                    />
+                </Link>
+                <MainSearchBar />
+            </div>
            
             <div className='header_center'>
-                <InputBase
-                    placeholder="Search in Eva"
-                    inputProps={{ disableUnderline: true }}
-                    multiline
-                />
-                <Search />
             </div>
 
             <div className='header_right'>
