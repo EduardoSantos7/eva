@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import MainSearchBar from "components/common/MainSearchBar/MainSearchBar";
 import { useUser } from "providers/UserProvider";
 import NoUserOptions from "components/common/NoUserOptions/NoUserOptions";
+import UserOptions from "components/common/UserOptions/UserOptions";
 
 export default function Nav() {
     const user = useUser()
@@ -28,7 +29,8 @@ export default function Nav() {
 
 
             <div className='header_right'>
-                {!user && <NoUserOptions/>}
+                {!user && <NoUserOptions />}
+                { user && <UserOptions/>}
             </div>
         </div>
     )
