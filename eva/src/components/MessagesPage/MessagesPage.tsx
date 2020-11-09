@@ -14,18 +14,12 @@ let socket;
 export default function MessagesPage() {
     const ENDPOINT = 'ws://localhost:9000/';
 
-    const [chats, setchats] = useState<any[]>()
+    const [chats, setChats] = useState<any[]>()
     const [currentChat, setCurrentChat] = useState<ChatOverview>(defaultChatOverview)
     const { chatId } = useParams<MessagesParams>();
 
     
     useEffect(() => {
-        const updateCurrentChat = async() => {
-            if (chats) {
-                let chat: ChatOverview = chats.filter((elem: ChatOverview) => elem.id === chatId)[0]
-                setCurrentChat(chat)
-            }
-        }
 
         socket = io(ENDPOINT);
 
@@ -34,13 +28,24 @@ export default function MessagesPage() {
         socket.on('chatsResponse', (chats_list: string) => {
             console.log(JSON.parse(chats_list));
             let chats_parsed = JSON.parse(chats_list);
-            setchats(chats_parsed);
+            setChats(chats_parsed);
             console.log(chats_parsed);
         });
-
-        updateCurrentChat()
         
-    }, [ENDPOINT, chatId, chats]);
+        
+    }, [ENDPOINT]);
+    
+    useEffect(() => {
+        const updateCurrentChat = async() => {
+            if (chats) {
+                let chat: ChatOverview = chats.filter((elem: ChatOverview) => elem.id === chatId)[0]
+                setCurrentChat(chat)
+            }
+        }
+        updateCurrentChat()
+
+        
+    }, [chatId, chats]);
 
     return (
         <div id="MessagesPage">

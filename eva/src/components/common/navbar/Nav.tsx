@@ -1,13 +1,11 @@
 import React from 'react'
 import 'materialize-css';
 
-import {ExpandMore, Language} from "@material-ui/icons"
-
 import "components/common/navbar/nav.css"
-import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MainSearchBar from "components/common/MainSearchBar/MainSearchBar";
 import { useUser } from "providers/UserProvider";
+import NoUserOptions from "components/common/NoUserOptions/NoUserOptions";
 
 export default function Nav() {
     const user = useUser()
@@ -27,14 +25,10 @@ export default function Nav() {
                 <MainSearchBar />
             </div>
            
-            <div className='header_center'>
-            </div>
+
 
             <div className='header_right'>
-                <p>Become a Doctor</p>
-                <Language />
-                <ExpandMore />
-                <Avatar />
+                {!user && <NoUserOptions/>}
             </div>
         </div>
     )
