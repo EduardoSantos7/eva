@@ -18,7 +18,7 @@ export default function ChatContainer(props: ChatOverview) {
     return (
         <div className="chat__container">
             <ChatHeader { ...props }/>
-            <ChatFooter />
+            <ChatFooter chatId={chatId}/>
         </div>
     )
 }
