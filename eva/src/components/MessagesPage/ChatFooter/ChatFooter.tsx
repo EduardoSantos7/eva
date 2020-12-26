@@ -8,14 +8,14 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import SendIcon from '@material-ui/icons/Send';
 
 import "components/MessagesPage/ChatFooter/ChatFooter.css"
-import ChatService from "services/chat/chat"
+import { useChatService } from "providers/ChatServiceProvider";
 
 export default function ChatFooter(props: any) {
-	const chat = new ChatService(props.chatId);
+	const chat = useChatService();
 
 	const sendMessage = (event: any) => {
 		console.log("Sending message")
-		chat.sendMessage("Hola");
+		chat.sendMessage(props.receptorID, "Hola");
 	}
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

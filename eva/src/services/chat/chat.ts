@@ -4,21 +4,38 @@ import io from "socket.io-client";
 const ENDPOINT = 'ws://localhost:9000/';
 
 export default class ChatService {
-    private socket: any;
+    private sockets: any = {};
+    private general_socket: any = null;
 
-    constructor(private receptor: string) {
-        this.socket = io(ENDPOINT);
+    constructor(private emisor_id?: string) {
+        if (emisor_id) {
+            this.general_socket = this.newSocket();
+        }
+    }
+
+    private newSocket = () => {
+        return io(ENDPOINT);
+    }
+
+    public addNewSocket = (receptor_id: string) => {
+        if (this.sockets.hasOwnProperty(receptor_id)) {
+            console.warn("Socket for this receptor already exists");
+            return;
+        }
+        this.sockets[receptor_id] = this.newSocket()
     }
 
     public getChats = () => {
-        this.socket.emit('getChats', '1')
+        if (!this.general_socket) {
+            console.warn("Id was not set so it's not possible to get chats");
+            return
+        }
+
+        this.general_socket.emit('getChats', '1')
         
         return new Promise((resolve, _reject) => {
-            this.socket.on('chatsResponse', (chats_list: string) => {
-                console.log(JSON.parse(chats_list));
+            this.general_socket.on('chatsResponse', (chats_list: string) => {
                 let chats_parsed = JSON.parse(chats_list);
-                console.log(chats_parsed);
-                this.sendMessage("gooool")
                 resolve(chats_parsed);
             });
             
@@ -26,8 +43,11 @@ export default class ChatService {
         
     }
 
-    public sendMessage = (message: string) => {
-        console.log("viendo " + message)
-        this.socket.emit('postMessage', message)
+    public sendMessage = (receptor_id: string, message: string) => {
+        if (!this.sockets.hasOwnProperty(receptor_id)) {
+            console.warn("Receptor was not found in the current channels", this.sockets);
+            return;
+        }
+        this.sockets[receptor_id].emit('postMessage', receptor_id, message)
     }
 }

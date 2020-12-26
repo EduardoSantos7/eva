@@ -4,8 +4,9 @@ import React from 'react';
 import SearchPage from 'components/searchPage/SearchPage';
 import MessagesPage from 'components/MessagesPage/MessagesPage';
 import LandingPage from "components/LandingPage/LandingPage/LandingPage";
-import { UserProvider } from "providers/UserProvider";
+import { UserProvider, useUser } from "providers/UserProvider";
 import { WindowStateProvider } from "providers/WindowStateProvider";
+import { ChatServiceProvider } from "providers/ChatServiceProvider";
 
 import "App.css"
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
+        <ChatServiceProvider id={useUser().id}>
         <Router>
           <Nav />
           <div className="app__body">
@@ -25,9 +27,9 @@ function App() {
               </Route>
               <Route path="/" component={LandingPage} />
             </Switch>
-
           </div>
         </Router>
+        </ChatServiceProvider>
       </UserProvider>
     </div>
   );

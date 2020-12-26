@@ -6,7 +6,7 @@ import ChatContainer from "components/MessagesPage/ChatContainer/ChatContainer";
 import { MessagesParams } from "interfaces/MessagesParams";
 import  'components/MessagesPage/MessagesPage.css';
 import { ChatOverview, defaultChatOverview } from "interfaces/ChatOverview";
-import ChatService from "services/chat/chat";
+import { useChatService } from "providers/ChatServiceProvider";
 
 
 export default function MessagesPage() {
@@ -15,7 +15,7 @@ export default function MessagesPage() {
     const [chats, setChats] = useState<any>()
     const [currentChat, setCurrentChat] = useState<ChatOverview>(defaultChatOverview)
     const { chatId } = useParams<MessagesParams>();
-    const chat = new ChatService(chatId);
+    const chat = useChatService();
 
     
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function MessagesPage() {
         getChats();
         
         
-    }, [ENDPOINT]);
+    }, [ENDPOINT, chat]);
     
     useEffect(() => {
         const updateCurrentChat = async() => {
