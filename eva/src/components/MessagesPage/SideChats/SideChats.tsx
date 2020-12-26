@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import ChatsSearchBar from 'components/MessagesPage/ChatsSearchBar/ChatsSearchBar';
 import SideBarHeader from "components/MessagesPage/SideBarHeader/SideBarHeader";

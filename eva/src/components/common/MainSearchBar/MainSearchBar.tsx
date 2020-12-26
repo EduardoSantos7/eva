@@ -1,30 +1,19 @@
 import React, { useState } from 'react'
 
 import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Clear';
 
 import "components/common/MainSearchBar/MainSearchBar.css"
 import { Grid } from "@material-ui/core";
 
 
 export default function MainSearchBar() {
-    const [showClear, setShowClear] = useState(false)
     const [value, setValue] = useState("")
 
     let input = React.createRef<HTMLInputElement>();
 
     const handleSearchBarOnChange = (e:any) => {
-        setShowClear(e.target.value ? true : false)
         setValue(e.target.value)
         console.log(value)
-    }
-    
-    const handleClearClick = () => {
-        if (input.current?.value) {
-            input.current.value = ""
-            setValue("")
-            setShowClear(false)
-        }
     }
 
     return (

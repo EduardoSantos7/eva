@@ -6,7 +6,6 @@ import "components/MessagesPage/ChatContainer/ChatContainer.css"
 import { useParams } from "react-router";
 import { MessagesParams } from "interfaces/MessagesParams";
 import { ChatOverview } from "interfaces/ChatOverview";
-import { ChatContainerPops } from "interfaces/ChatContainerPops";
 
 export default function ChatContainer(props: ChatOverview) {
     const { chatId } = useParams<MessagesParams>();
@@ -19,7 +18,7 @@ export default function ChatContainer(props: ChatOverview) {
     return (
         <div className="chat__container">
             <ChatHeader { ...props }/>
-            <ChatFooter />
+            <ChatFooter receptorID={props.id}/>
         </div>
     )
 }
