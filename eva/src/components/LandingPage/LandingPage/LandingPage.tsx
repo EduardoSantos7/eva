@@ -1,9 +1,9 @@
-import Banner from 'components/banner/Banner'
+import Banner from 'components/LandingPage/banner/Banner'
 import React from 'react'
 
-import "components/landingPage/landingPage.css"
-import Card from 'components/card/Card';
-import Footer from 'components/footer/Footer';
+import "components/LandingPage/LandingPage/landingPage.css"
+import Card from 'components/LandingPage/card/Card';
+import Footer from 'components/LandingPage/footer/Footer';
 
 export default function LandingPage() {
     return (

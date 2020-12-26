@@ -8,10 +8,23 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import SendIcon from '@material-ui/icons/Send';
 
 import "components/MessagesPage/ChatFooter/ChatFooter.css"
+import { useChatService } from "providers/ChatServiceProvider";
 
-export default function ChatFooter() {
+export default function ChatFooter(props: any) {
+	const chat = useChatService();
+
+	const sendMessage = (event: any) => {
+		console.log("Sending message")
+		chat.sendMessage(props.receptorID, "Hola");
+	}
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+		if (event.key === 'Enter') {
+			sendMessage(event)
+		}
+	}
 	return (
-		<div className="chat__footer">
+		<div className="chat__footer" onKeyDown={handleKeyDown}>
 			<div className="chat__footer__multimedia__icons">
 				<CameraAltIcon />
 				<MicIcon />
@@ -23,7 +36,7 @@ export default function ChatFooter() {
 				<EmojiEmotionsIcon />
 			</div>
             <div className="chat__footer__send">
-                <SendIcon/>
+				<SendIcon onClick={(e) => {sendMessage(e)}}/>
             </div>
 		</div>
 	);

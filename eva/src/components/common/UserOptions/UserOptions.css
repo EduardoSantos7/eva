@@ -1,0 +1,33 @@
+.user__options {
+    display: flex;
+    align-items: center
+}
+
+.user__options__avatar__name {
+    display: flex;
+    align-items: center;
+}
+
+.user__options__avatar__name>span {
+    font-weight: bold;
+    font-size: 12;
+    margin: 5px;
+}
+
+.user__options__avatar__name:hover {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.user__options>.MuiSvgIcon-root {
+    padding: 4px;
+    margin-left: 30px;
+    color: black;
+    transform: scale(1.7);
+    background-color: rgba(0, 0, 0, .07);
+    border-radius: 999px;
+}

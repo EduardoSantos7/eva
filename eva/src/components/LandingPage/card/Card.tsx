@@ -1,5 +1,5 @@
 import React from 'react'
-import "components/card/card.css"
+import "components/LandingPage/card/card.css"
 
 
 interface CardProps {
